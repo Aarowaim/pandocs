@@ -19,9 +19,14 @@ Bit 0 - P10 Input: Right or A        (0=Pressed) (Read Only)
 
 ::: tip NOTE
 
-Most programs read from this port several times in a row
-(the first reads are used as a short delay, allowing the inputs to stabilize,
-and only the value from the last read is actually used).
+When using the joypad, the buttons bounce off the switches inside the Game
+Boy. In order to prevent false readings, most programs use a debounce routine.
+
+A basic debounce routine is to allow a short time for readings to settle after
+making a selection. It is common to do this by reading multiple times from
+this port (the first reads generate enough delay for the input to stabilize,
+but only the final read is actually used). Then, compare the reading to a
+previous reading using `XOR` and keep the changed buttons using `AND`.
 
 :::
 
